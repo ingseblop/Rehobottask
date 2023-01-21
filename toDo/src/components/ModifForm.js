@@ -1,40 +1,41 @@
 import { useDispatch } from 'react-redux';
-import { newToDo } from '../reducers/toDoReducer'
+import { updateToDo } from '../reducers/toDoReducer'
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
-  
-function Formulario() {
-    const dispatch = useDispatch()
 
-    const createActivity= async(event)=>{
- 
-        const id = event.target.toDoId.value
+function ModiFormulario({item, modifHandler}) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const dispatch = useDispatch()
+    const toDo = item
+    const updateActivity= async (event)=>{
+        
+        const id = toDo.id
         const descripcion = event.target.descripcion.value
         const fechaCreacion = event.target.fechaCreacion.value
         const fechaFin = event.target.fechaFin.value
         const estado = event.target.estado.value
 
-        const newActivity ={
+        const updateActivity ={
             id: id,
             descripcion: descripcion,
             fechaCreacion: fechaCreacion,
             fechaFin: fechaFin,
             estado: estado
         }
-        dispatch(newToDo(newActivity))
+        dispatch(updateToDo(updateActivity))
     }
     return(
         <div>
             <h4> Nueva actividad</h4>
-            <Form onSubmit={createActivity}>
+            <Form onSubmit={updateActivity}>
                 <Form.Group as={Row}>
                     <Form.Label column sm="2">
                     Id
                     </Form.Label>
                     <Col sm="8">
-                    <Form.Control type="text" name="toDoId" placeholder="ID" required/>
+                    <Form.Control type="text" name="toDoId" value={toDo.id} readonly/>
                     </Col>
                 </Form.Group>
 
@@ -43,7 +44,7 @@ function Formulario() {
                     Descripción
                     </Form.Label>
                     <Col sm="8">
-                    <Form.Control as="textarea" name="descripcion" placeholder="Descripción" required/>
+                    <Form.Control as="textarea" name="descripcion" placeholder={toDo.descripcion} required/>
                     </Col>
                 </Form.Group>
                 <Row>
@@ -53,7 +54,7 @@ function Formulario() {
                                 Fecha de creación
                             </Form.Label>
                             <Col sm="4">
-                            <Form.Control type="date" name="fechaCreacion"/>
+                            <Form.Control type="date" name="fechaCreacion" placeholder={toDo.fechaCreacion}/>
                             </Col>
                         </Row>
                     </Form.Group>
@@ -63,7 +64,7 @@ function Formulario() {
                                 Fecha de finalización
                             </Form.Label>
                             <Col sm="4">
-                            <Form.Control type="date" name="fechaFin"/>
+                            <Form.Control type="date" name="fechaFin" placeholder={toDo.fechaFin}/>
                             </Col>
                         </Row>
                     </Form.Group>
@@ -71,7 +72,7 @@ function Formulario() {
                 <Row>
                     <Form.Label column sm="2">Estado</Form.Label>
                     <Col sm="2">
-                    <Form.Select name="estado">
+                    <Form.Select name="estado" placeholder={toDo.estado}>
                         <option>Seleccionar</option>
                         <option value="Por hacer">Por hacer</option>
                         <option value="Cancelado">Cancelado</option>
@@ -79,10 +80,10 @@ function Formulario() {
                     </Form.Select>
                     </Col>
                 </Row>
-                <Button variant="success" type="submit">Guardar</Button>
+                <Button variant="success" type="submit" onClick={modifHandler}>Guardar</Button>
             </Form>
         </div>
     )
 }
 
-export default Formulario
+export default ModiFormulario
