@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 
-function ModiFormulario({item, modifHandler}) {
+function ModiFormulario({item}) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const dispatch = useDispatch()
     const toDo = item
@@ -80,7 +80,7 @@ function ModiFormulario({item, modifHandler}) {
                     </Form.Select>
                     </Col>
                 </Row>
-                <Button variant="success" type="submit" onClick={modifHandler}>Guardar</Button>
+                <Button variant="success" type="submit">Guardar</Button>
             </Form>
         </div>
     )
