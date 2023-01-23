@@ -6,6 +6,7 @@ import Formulario from './components/Forms';
 import Button from 'react-bootstrap/Button';
 import { initList } from './reducers/toDoReducer';
 import ToList from './components/toList';
+import { Container } from 'react-bootstrap';
 
 function App() {
   const dispatch = useDispatch()
@@ -22,14 +23,16 @@ function App() {
   }
 
   return (
-    <div className='App'>
-      <h1>To do</h1>
-      <ToList/>
-      {control ?
-        <Button variant="success" onClick={handlerNewTodo}>Nueva Actividad</Button> : <Formulario />
-      }
-      
-    </div>
+    <Container>
+      <div className='App'>
+        <h1>To do</h1>
+        <ToList/>
+        {control ?
+          <Button variant="success" onClick={handlerNewTodo}>Nueva Actividad</Button> : <Formulario />
+        }
+        
+      </div>
+    </Container>
   );
 }
 
